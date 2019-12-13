@@ -121,7 +121,7 @@ class App extends Component {
                                 />
                             } />
                             {/* Workbench is for writing new code to keep new parts isolated for easier developing */}
-                            <Route exact path="/workbench" component={WorkBench} />
+                            {/* <Route exact path="/workbench" component={WorkBench} /> */}
                             {/* If no url routes match show error page */}
                             <Route component={NoMatch} />
                         </Switch>
