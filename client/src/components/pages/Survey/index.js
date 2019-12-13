@@ -142,8 +142,8 @@ class Survey extends Component  {
                                 </Col>
                             </Row>
         
-                            <Row>
-                                <Form>
+                            <Row className="rounded" style={styles.formRow}>
+                                <Form className="mx-auto m-3 p-3">
                                     {this.state.surveyQuestions.length ? this.state.surveyQuestions.map((question, index) => {
                                         return(
                                             <SurveyQuestion
@@ -155,7 +155,7 @@ class Survey extends Component  {
                                         )
                                     }) : null}
         
-                                    <Button onClick={this.handleFormSubmit}>Submit</Button>
+                                    <Button color="info" onClick={this.handleFormSubmit}>Submit</Button>
                                 </Form>
                             </Row>
                         </Container>
@@ -166,7 +166,7 @@ class Survey extends Component  {
                             title="Thank you "
                             subtitle="Head home to see all matches or retake your test to get differant matches."
                         >
-                            <a href="/">
+                            <a href="/" >
                                 <Button color="info">
                                     Home
                                 </Button>
@@ -224,6 +224,10 @@ class Survey extends Component  {
 const styles = {
     container: {
         paddingTop: "20px"
+    },
+    formRow: {
+        backgroundColor: "rgb(83, 81, 86, 80%)",
+        color: "white"
     }
 
 };

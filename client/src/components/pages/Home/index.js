@@ -221,7 +221,7 @@ class Home extends Component{
     render() {
         
         return (
-            <div className="pt-4">
+            <div style={styles.container} className="pt-4">
 
                 {/* Generic model waiting for function to show and fill it */}
                 <SweetAlert
@@ -265,21 +265,14 @@ class Home extends Component{
                     <Col lg="6" className="mx-auto">
                         {this.state.userPool.length ? (
                             <div>
-                                {this.state.userPool.map((user) => {
+                                {this.state.userPool.reverse().map((user) => {
                                     return(
                                         <TextCard
                                         key={user._id}
                                         title={`Name: ${user.name}`}
                                         subtitle={`Username: ${user.username}`}
                                         >
-                                            {/* Delete this user button */}
-                                            <Button className="m-1" color="danger" onClick={() => this.deleteUser(user._id)}>
-                                                Delete
-                                            </Button>
-                                            {/* Edit user button */}
-                                            <Button className="m-1" color="info" onClick={() =>  this.editUserModal(user)}>
-                                                Edit
-                                            </Button>
+                                            <img alt="userAvatar" src={user.avatarImage || "./images/avitars/avitar.png"} />
                                         </TextCard>
                                     )
                                 })}
@@ -301,6 +294,10 @@ const styles = {
         maxHeight: "50vh", 
         minWidth: "35%", 
         overflow: "auto" 
+    },
+    container: {
+        padding: "20px",
+        backgroundColor: "rgb(122, 111, 148, 50%)"
     }
 }
 

@@ -80,17 +80,18 @@ getMatches = () => {
   
   
             <TextCard 
+              style={styles.container}
               title={`Name: ${this.state.user.name}`}
               subtitle={`Username: ${this.state.user.username}`}
             >
   
               <div className="row">
-                <div style={styles.subCol} className="col">
-                  <img src={this.state.user.avatarImage|| "./images/avitars/avitar.png"} alt="avitar" />
-                  <button className="btn btn-info" onClick={this.avatarModel}>Avatars</button>
+                <div style={{flexWrap: "wrap"}} className="col mx-auto">
+                  <img className="rounded" style={styles.cardImg} src={this.state.user.avatarImage|| "./images/avitars/avitar.png"} alt="avitar" />
+                  <button className="btn m-3" onClick={this.avatarModel}><span role="img" aria-label="avatars">&#128101;</span></button>
                 </div>
                 
-                <div className="col">
+                <div className="col mx-auto">
                   <ul>
                     <li>Your number: {this.state.user.phone_num}</li>
                     <li>Your email: {this.state.user.email}</li>
@@ -107,24 +108,26 @@ getMatches = () => {
                   <button type="button" className="btn btn-danger m-1" onClick={this.props.signOut}>Sign out</button>
                 </div>
   
-                <div className="col-10 mx-auto">
+              </div>
+
+              <div className="row mx-auto m-5">
                   {this.state.matches.length ? this.state.matches.map((match, index) => {
                     if(match._id !== this.state.user._id){
                       return(
                         <TextCard
                           key={index}
+                          className="col m-1"
                           title={`Name: ${match.name}`}
                           subtitle={`Username: ${match.username}`}
                         >
-                          <img className="card-img" src={match.avatarImage|| "./images/avitars/avitar.png"} alt="matchAvatar" />
+                          <img style={styles.cardImg} src={match.avatarImage|| "./images/avitars/avitar.png"}
+                           alt="matchAvatar" />
                         </TextCard>
                       )
                     }
-                }) : null}
+                  }) : null}
                 </div>
-  
-              </div>
-  
+
             </TextCard>
           </div>
         )
@@ -144,9 +147,15 @@ const styles = {
     minWidth: "35%", 
     overflow: "auto" 
   },
-  subCol: {
-    display: "flex",
-    flexDirection: "column"
+  cardImg: {
+    height:"100%",
+    width: "100%",
+    maxWidth: "350px",
+    maxHeight: "350px"
+  },
+  container: {
+    padding: "20px",
+    backgroundColor: "rgb(54, 113, 148, 50%)"
   }
 }
 export default UserHome;

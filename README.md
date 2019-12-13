@@ -1,10 +1,9 @@
-# MERN_app-template-withAuth
-Boilerplate for full MERN stack apps that require security features.
+# Friend Filter
+A state of the art personality test and matching sysytem. A must have for any eco-chamber!
 
 ## Overview
-Full stack ready for deployment with built in CRUD functions and components.
-Made so the file structure is easy to follow and replicate to keep order as app increases in size.
-Comes with basic dependencies so developers can choose to add redux or other depencies on top off it. But allows for devs to have more choce on how app is built. This version comes with jsonwebtoken and bcrypt for hashing and authentication.
+Revamped version of app from bootcamp at SMU. Allows users to make a profile, choose a avatar and take a personality test.
+Once you have taken a personality test you can find other users with the same personality type.
 
 **__Site is deployment ready out of the box__**
 
@@ -46,4 +45,4 @@ Once dependencies are installed type *npm start* in termial. This will start the
 - Reactstrap - Special components made just for react
 - Moment - For easy formatting of dates
 
-See a working delpoyed version here: https://arcane-beach-57949.herokuapp.com/
+See a working delpoyed version here: https://mighty-lake-64628.herokuapp.com/

@@ -12,7 +12,9 @@ const AvatarSelector = props => {
                         <div className="card">
                             <img className="card-img" src={avatar[1]} alt={`avatar${index}`} />
 
-                            <button className="btn btn-primary m-2" onClick={() => props.selectAvatar(avatar[1])}>&#9757;</button>
+                            <button className="btn btn-primary m-2" onClick={() => props.selectAvatar(avatar[1])}>
+                                <span aria-label="hand" role="img">&#9757;</span>
+                            </button>
                         </div>
                     </div>
                 )
