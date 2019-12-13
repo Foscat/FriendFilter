@@ -137,6 +137,11 @@ class Survey extends Component  {
                             
                             <Row>
                                 <Col>
+                                    <div className="card">
+                                        <img className="card-img" src="./images/opinions.png" alt="'opinions'" />
+                                    </div>
+                                </Col>
+                                <Col>
                                     <h3>Personality Test</h3>
                                     <h6>Fill out form and click submit to find other people just like you!</h6>
                                 </Col>

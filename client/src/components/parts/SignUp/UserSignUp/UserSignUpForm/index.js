@@ -39,7 +39,7 @@ const UserSignUpForm = (props) => {
 
             <FormGroup check>
                 <Label check>
-                    <Input type="checkbox" />{' '}
+                    <Input type="checkbox" name="termsAndConditons" onChange={props.handleInputChange} />{' '} 
                     I'm voting Kyle Foster for president in 2028.
                 </Label>
             </FormGroup>

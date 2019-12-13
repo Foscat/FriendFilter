@@ -22,7 +22,7 @@ class NavBar extends Component  {
                     <strong>
                         {/* // eslint-disable-next-line */}
                         <a className="navbar-brand" href="/" style={styles.brand}>
-                            Friend Finder
+                            "Friend" Finder
                         </a>
                     </strong>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

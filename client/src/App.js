@@ -42,6 +42,14 @@ class App extends Component {
         });
     }
 
+    setAutoLogin = (username, password) => {
+        this.setState({ 
+            logInUsername: username,
+            logInPassword: password
+        });
+        this.logInUser();
+    }
+
     logInUser = () => {
         let s = this.state;
 
@@ -97,6 +105,7 @@ class App extends Component {
                     logIn={this.logInUser}
                     handleChange={this.handleInputChange}
                     signOut={this.signOutUser}
+                    autoLogIn={this.setAutoLogin}
                 />
         }
         else {

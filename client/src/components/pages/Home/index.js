@@ -24,6 +24,7 @@ class Home extends Component{
             addEmail: "",
             addPassword: "",
             addPhoneNum: 0,
+            termsAndConditons: false,
 
             // Model attrs
             show: false,
@@ -46,17 +47,17 @@ class Home extends Component{
     // When page loads see inital state value
     componentDidMount(){
         // console.log("Mount State: " , this.state);
-        this.getUsers();
+        // this.getUsers();
         if(localStorage.getItem("token") !== null){
             this.props.authenticate();
         }
     }
 
     // Every time state changes this function fires to give you a update all changes and thier values
-    // componentDidUpdate(){
-        // console.log("Updated State: ", this.state);
+    componentDidUpdate(){
+        console.log("Updated State: ", this.state);
         // console.log("token present", localStorage.getItem("token"))
-    // }
+    }
 
     // General handler for inputs thats value is to change the state
     // If state does not exsist it makes a state field with its name
@@ -101,6 +102,15 @@ class Home extends Component{
         });
         return;
         }
+        if (s.termsAndConditons !== "on") {
+        // If failed block submit and show alert
+        this.setState({
+            title: "Woah there bucco!",
+            text: "Please agree to terms and conditions.",
+            show: true
+        });
+        return;
+        }
 
         // Sends info of to util api call
         API.addUser({
@@ -109,13 +119,16 @@ class Home extends Component{
             email: s.addEmail,
             password: s.addPassword,
             phone_num: s.addPhoneNum
-        })
-        .catch(err=>console.error("You hit an error: ",err))
+        }).then(res => {console.log(res)})
         .then(res => {
             // console.log("Add user res:", res);
+            this.props.autoLogIn(s.addUsername,s.addPassword);
             // Comment back in for deployment but comment out for testing inputs
-            window.location.reload(false);
+            // window.location.reload(false);
+            return "logged in"
         })
+        .catch(err=>console.error("You hit an error: ",err))
+        
     };
 
     // Grabs all users in db and displays them on the DOM
@@ -242,8 +255,11 @@ class Home extends Component{
                         <TextCard 
                             title="Sign up to find friends"
                             subtitle="5 internet friends == 1 real life friend">
+
+                                <img className="card-img" src="./images/tryToday.png" alt="try today" />
+
                                 <Button className="m-1" color="info" onClick={() => this.getUsers()}>
-                                    Get all users in DB
+                                    See all users
                                 </Button>
 
                                 <Button className="m-1" color="primary" onClick={() => this.signInModel()}>
@@ -253,6 +269,7 @@ class Home extends Component{
                                 {/* Sign up component holds the actual form inside of another component files kept nested to 
                                     help with organization  */}
                                 <UserSignUp 
+                                    TandC={this.checkTerms}
                                     handleInputChange={this.handleInputChange}
                                     handleFormSubmit={this.signUpUser}
                                 />
