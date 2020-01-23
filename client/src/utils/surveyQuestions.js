@@ -13,7 +13,7 @@ const questions = [
     "The goal of golf is to play as little golf as possible.",
     "If every person on Earth blinked at the same time, nobody would ever find out.",
     "Everywhere is walking distance if you have enough time",
-    "Batman fights cirme at night to avoid tanlines."
+    "Batman fights crime at night to avoid tanlines."
 ];
 
 module.exports = questions;
