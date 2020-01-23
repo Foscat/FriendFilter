@@ -1,7 +1,7 @@
 {
-  "name": "mern_app-template-withauth",
+  "name": "friendfilter",
   "version": "1.0.0",
-  "description": "MERN app template with bcrypt and jwt for authentication",
+  "description": "Survey app and echo chamber",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -14,28 +14,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Foscat/MERN_app-template.git"
+    "url": "git+https://github.com/Foscat/FriendFilter.git"
   },
   "author": "Foscat",
   "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^4.1.2",
-    "nodemon": "^1.19.4"
+  "bugs": {
+    "url": "https://github.com/Foscat/FriendFilter/issues"
   },
+  "homepage": "https://github.com/Foscat/FriendFilter#readme",
   "dependencies": {
-    "axios": ">=0.18.1",
-    "bcrypt": "^3.0.6",
+    "axios": "^0.19.2",
+    "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
-    "express": "^4.16.3",
+    "express": "^4.17.1",
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.8",
+    "mongoose": "^5.8.9",
     "prop-types": "^15.7.2",
-    "react": "^16.11.0"
+    "react": "^16.12.0"
   },
-  "bugs": {
-    "url": "https://github.com/Foscat/MERN_app-template-withAuth/issues"
-  },
-  "homepage": "https://github.com/Foscat/MERN_app-template-withAuth#readme"
+  "devDependencies": {
+    "concurrently": "^5.0.2",
+    "nodemon": "^2.0.2"
+  }
 }

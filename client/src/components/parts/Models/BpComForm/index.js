@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Button, FormGroup, Label, Input, Form } from 'reactstrap';
 
-const BP_Com_Form = (props) => {
+const BpComForm = (props) => {
     console.log(props.parentComment);
     return (
         <Row>
@@ -12,13 +12,6 @@ const BP_Com_Form = (props) => {
                 method="post"
                 id="post_comment-form"
             >
-
-                <FormGroup>
-                    <Label for="commentPostAuthor">Comment author</Label>
-                    <Input type="text" name="commentPostAuthor" onChange={props.handleInputChange}
-                    id="commentPostAuthor" placeholder="Author"/>
-                </FormGroup>
-
 
                 <FormGroup>
                     <Label for="commentPostBody">Comment body</Label>
@@ -35,4 +28,4 @@ const BP_Com_Form = (props) => {
     );
 };
 
-export default BP_Com_Form;
+export default BpComForm;

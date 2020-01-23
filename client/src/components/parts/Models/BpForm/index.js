@@ -1,5 +1,5 @@
 import React from 'react';
-import TextCard from "../TextCard";
+import TextCard from "../../TextCard";
 import { Row, Button ,Form, FormGroup, Label, Input} from 'reactstrap';
 
 
@@ -7,7 +7,7 @@ import { Row, Button ,Form, FormGroup, Label, Input} from 'reactstrap';
 // Gives simple interface for adding users to db
 // Rinse and repeat for new tables in db.
 
-const BP_Form = (props) => {
+const BpForm = (props) => {
     
     return(
 
@@ -19,12 +19,6 @@ const BP_Form = (props) => {
                 style={{backgroundColor: "rgb(193, 152, 154)"}}
             >
                 <Form>
-                    <FormGroup>
-                        <Label for="addPostAuthor">Post Author</Label>
-                        <Input type="text" name="addPostAuthor" onChange={props.handleInputChange}
-                        id="addPostAuthor" placeholder="Post Author"/>
-                    </FormGroup>
-
                     <FormGroup>
                         <Label for="addPostTitle">Post Title</Label>
                         <Input type="text" name="addPostTitle" onChange={props.handleInputChange}
@@ -46,4 +40,4 @@ const BP_Form = (props) => {
     )
 }
 
-export default BP_Form;
+export default BpForm;

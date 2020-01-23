@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Button, FormGroup, Label, Input, } from 'reactstrap';
 
-const Edit_Com = (props) => {
+const EditCom = (props) => {
     return (
         <Row>
             <form
@@ -36,4 +36,4 @@ const Edit_Com = (props) => {
     );
 };
 
-export default Edit_Com;
+export default EditCom;

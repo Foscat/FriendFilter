@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Button, FormGroup, Label, Input, } from 'reactstrap';
 
-const Edit_BP = (props) => {
+const EditBp = (props) => {
     return (
         <Row>
             <form
@@ -11,12 +11,6 @@ const Edit_BP = (props) => {
                 method="put"
                 id="editBoardPostModel"
             >
-
-                <FormGroup>
-                    <Label for="editPostAuthor">Edit post author</Label>
-                    <Input type="text" name="editPostAuthor" onChange={props.handleInputChange}
-                    id="editPostAuthor" defaultValue={props.boardPost.postAuthor} placeholder="Edit author"/>
-                </FormGroup>
 
                 <FormGroup>
                     <Label for="editPostTitle">Edit post title</Label>
@@ -37,4 +31,4 @@ const Edit_BP = (props) => {
     )
 };
 
-export default Edit_BP;
+export default EditBp;

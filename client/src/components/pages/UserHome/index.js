@@ -125,6 +125,7 @@ getMatches = () => {
                         </TextCard>
                       )
                     }
+                    else return null
                   }) : null}
                 </div>
 

@@ -5,11 +5,11 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import API from "../../../utils/API";
 // Custom forms for chat interface
 // Create and edit a board post
-import BP_Form from "../../parts/Models/BP_Form";
-import Edit_BP from "../../parts/Models/Edit_BP";
+import BpForm from "../../parts/Models/BpForm";
+import EditBp from "../../parts/Models/EditBp";
 // Create and edit a comment on a board post
-import BP_Com_Form from "../../parts/Models/BP_Com_Form";
-import Edit_Com from "../../parts/Models/Edit_Com";
+import BpCom_Form from "../../parts/Models/BpComForm";
+import EditCom from "../../parts/Models/EditCom";
 import TextCard from '../../parts/TextCard';
 
 class Forum extends Component {
@@ -18,6 +18,10 @@ class Forum extends Component {
         super(props);
 
         this.state={
+
+            // Signed in state passed down from App level
+            user: this.props.user,
+
             boardPostPool: [],
             whichPost: "",
             commentPool: [],
@@ -73,7 +77,8 @@ class Forum extends Component {
         
         // Sends info of to util api call
         API.addBoardPost({
-            postAuthor: s.addPostAuthor,
+            _postAuthorId: s.user._id,
+            postAuthor: s.user.username,
             postTitle: s.addPostTitle,
             postBody: s.addPostBody
         })
@@ -83,40 +88,31 @@ class Forum extends Component {
 
     // Grabs all board posts in db and displays them on the DOM
     getBoardPosts= async () => {
-
         console.log("Get board posts: ", this.state);
-
         // When board posts are pulled from the db the are put into an array. That array when it contains info loops and makes cards for each post
         API.getBoardPosts().then(res => this.setState({ boardPostPool: res.data }))
         .catch(err => console.error("Get board posts hit an error", err))
-
     }
 
     // Function that handles the deleting of a single user from the db
     // This will be tied to a button that is tied to a specific user
     deleteBoardPost = id => {
-
         console.log("Delete function started");
         alert("You are deleting a board post from the db!");
-
         // Send request to util api call
         API.deleteBoardPost(id).then(() => this.getBoardPosts())
-
     }
 
     // Sweet alert model that contains form for editing a board post 
     editBP_Modal = boardPost => {
-
         // Set state to match so that unchanged values are not erased
         this.setState({ 
-            editPostAuthor : boardPost.postAuthor,
             editPostTitle : boardPost.postTitle,
             editPostBody : boardPost.postBody 
         });
-        
         let text = (
             <div>
-                <Edit_BP
+                <EditBp
                     boardPost={boardPost}
                     handleInputChange={this.handleInputChange}
                     handleUpdateFormSubmit={this.handleUpdateBP_Form}
@@ -133,10 +129,9 @@ class Forum extends Component {
 
     // Sweet alert model that contains form for commenting on a post 
     commentModal = boardPostComment => {
-        
         let text = (
             <div>
-                <BP_Com_Form 
+                <BpCom_Form 
                     handleInputChange={this.handleInputChange}
                     handleCommentFormSubmit={this.handleCommentFormSubmit}
                     boardPostComment={boardPostComment}
@@ -153,7 +148,6 @@ class Forum extends Component {
 
     // When the update form on the model is submitted this function fires
     handleUpdateBP_Form = (id) => {
-
         // **Un-comment out to test values**)
         console.log("Id arg check: ",  id)
         console.log("postAuthor: " + this.state.editPostAuthor);
@@ -176,7 +170,6 @@ class Forum extends Component {
     
     // Function that handles comments added to board post 
     handleCommentFormSubmit = (id) => {
-
         // **Un-comment out to test values**
         console.log("Id arg check: ",  id)
         console.log("Comment author: ", this.state.commentPostAuthor);
@@ -195,7 +188,6 @@ class Forum extends Component {
     }
 
     getThisPostComments = id => {
-
         // **Un-comment out to test values**
         console.log("Arg id: " + id);
         this.setState({ whichPost: id });
@@ -207,8 +199,7 @@ class Forum extends Component {
     } 
 
     deleteComment = (comId, bpId) => {
-        
-         // **Un-comment out to test values**
+        // **Un-comment out to test values**
         // console.log("Arg id: " + id);
 
         API.deleteComment(comId).then(() => this.getThisPostComments(bpId))
@@ -216,16 +207,14 @@ class Forum extends Component {
 
     // Sweet alert model that contains form for PUT operations 
     editComModel = boardPostComment => {
-
         // Set state to match so that unchanged values are not erased
         this.setState({ 
             editCommentPostAuthor : boardPostComment.commentAuthor,
             editCommentPostBody : boardPostComment.commentTitle,
         });
-    
         let text = (
             <div>
-                <Edit_Com
+                <EditCom
                     handleInputChange={this.handleInputChange}
                     handleCommentEditFormSubmit={this.handleCommentEditFormSubmit}
                     boardPostComment={boardPostComment}
@@ -241,12 +230,9 @@ class Forum extends Component {
     }
 
     handleCommentEditFormSubmit = (comId, bpId) => {
-        
         // **Un-comment out to test values**)
-        console.log("Id arg check: " +  id)
         console.log("comment Id: " + comId);
         console.log("boardPost Id: " + bpId);
-
         API.updateComment(comId, {
             commentAuthor: this.state.editCommentPostAuthor,
             commentBody: this.state.editCommentPostBody
@@ -267,54 +253,60 @@ class Forum extends Component {
     };
 
     render() {
-      return (
-        <div>
-            <SweetAlert
-                show={this.state.show}
-                title={this.state.title}
-                onConfirm={() => this.setState({ show: false })}
-                style={{ minWidth: "35%" }}
-            >
-                <div style={{ maxHeight: "50vh", minWidth: "35%", overflow: "auto" }}>
-                    {this.state.text}
-                </div>
-            </SweetAlert>
+        return (
+            <div style={styles.body}>
+                <SweetAlert
+                    show={this.state.show}
+                    title={this.state.title}
+                    onConfirm={() => this.setState({ show: false })}
+                    style={{ minWidth: "35%" }}
+                >
+                    <div style={{ maxHeight: "50vh", minWidth: "35%", overflow: "auto" }}>
+                        {this.state.text}
+                    </div>
+                </SweetAlert>
 
-            <Row>
-                <Col className="mx-auto" sm="6">
-                    <Row>
-                        <Button color="success" onClick={() => this.getBoardPosts()}>
-                            Get Board Posts
-                        </Button>
-                    </Row>
-                </Col>
-            </Row>
+                <Row>
+                    <Col className="mx-auto" sm="6">
+                        <Row>
+                            <Button color="success" onClick={() => this.getBoardPosts()}>
+                                Get Board Posts
+                            </Button>
+                        </Row>
 
-            <Row style={{justifyContent: "space-between", padding: "10px", margin: "3%"}}>
-                {this.state.boardPostPool.length ? (this.state.boardPostPool.map(bp => {
-                    return(
-                        <TextCard
-                            key={bp._id}
-                            title={bp.postTitle}
-                            subtitle={`Posted by: ${bp.postAuthor}`}
-                        >
-                            <p> {bp.postBody} </p>
+                        <BpForm 
+                            handleInputChange={this.handleInputChange}
+                            handleFormSubmit={this.makeBoardPost}
+                        />
+                    </Col>
+                </Row>
 
-                            <Button color="danger" onClick={()=> this.deleteBoardPost(bp._id)}>X</Button>
-                            <Button color="warning" onClick={() => this.editBP_Modal(bp)}>Edit</Button>
-                        </TextCard>
-                    )
-                })) : null}
-            </Row>
-          
-        </div>
-      )
+                <Row style={{justifyContent: "space-between", padding: "10px", margin: "3%"}}>
+                    {this.state.boardPostPool.length ? (this.state.boardPostPool.map(bp => {
+                        return(
+                            <TextCard
+                                key={bp._id}
+                                title={bp.postTitle}
+                                subtitle={`Posted by: ${bp.postAuthor}`}
+                            >
+                                <p> {bp.postBody} </p>
+
+                                <Button color="danger" onClick={()=> this.deleteBoardPost(bp._id)}>X</Button>
+                                <Button color="warning" onClick={() => this.editBP_Modal(bp)}>Edit</Button>
+                            </TextCard>
+                        )
+                    })) : null}
+                </Row>
+            
+            </div>
+        );
+
     }
 }
 
 let styles = {
     body: {
-
+        marginTop: "4%"
     }
 };
 
