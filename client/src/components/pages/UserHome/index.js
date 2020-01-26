@@ -110,13 +110,13 @@ getMatches = () => {
   
               </div>
 
-              <div className="row mx-auto m-5">
+              <div className="row mx-auto">
                   {this.state.matches.length ? this.state.matches.map((match, index) => {
                     if(match._id !== this.state.user._id){
                       return(
                         <TextCard
                           key={index}
-                          className="col m-1"
+                          className="col-12 m-1"
                           title={`Name: ${match.name}`}
                           subtitle={`Username: ${match.username}`}
                         >

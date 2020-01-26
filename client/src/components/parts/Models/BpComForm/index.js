@@ -28,14 +28,4 @@ const BpComForm = (props) => {
     );
 };
 
-const styles = {
-    form:{
-        display: "flex",
-        flex: 1,
-    },
-    fg:{
-
-    }
-}
-
 export default BpComForm;

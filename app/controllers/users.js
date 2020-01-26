@@ -9,7 +9,7 @@ module.exports = {
   findAll: function(req, res) {
     console.log("Find all users request.");
     db.User.find(req.query)
-      .then(dbUser => res.json(dbUser))
+      .then(dbUser => res.json(dbUser.reverse()))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {

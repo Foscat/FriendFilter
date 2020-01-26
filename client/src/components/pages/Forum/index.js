@@ -207,13 +207,11 @@ class Forum extends Component {
             editCommentPostBody : boardPostComment.commentTitle,
         });
         let text = (
-            <div>
                 <EditCom
                     handleInputChange={this.handleInputChange}
                     handleCommentEditFormSubmit={this.handleCommentEditFormSubmit}
                     boardPostComment={boardPostComment}
                 />
-            </div>
         )
         // Update state to show model
         this.setState({

@@ -282,7 +282,7 @@ class Home extends Component{
                     <Col lg="6" className="mx-auto">
                         {this.state.userPool.length ? (
                             <div>
-                                {this.state.userPool.reverse().map((user) => {
+                                {this.state.userPool.map((user) => {
                                     return(
                                         <TextCard
                                         key={user._id}
