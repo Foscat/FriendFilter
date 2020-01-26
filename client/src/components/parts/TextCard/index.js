@@ -6,16 +6,16 @@ import { Card, CardBody, CardHeader, CardTitle, CardSubtitle } from 'reactstrap'
 
 const TextCard = (props) => {
     return(
-        <Card className={props.className} style={props.style}>
+        <Card className={props.className} style={{borderRadius: "10px", ...props.style}}>
         
             <CardHeader>
 
                 <CardTitle>
-                    <h2>{props.title}</h2>
+                    <h3>{props.title}</h3>
                 </CardTitle>
 
                 <CardSubtitle>
-                    <h4>{props.subtitle}</h4>
+                    <h5>{props.subtitle}</h5>
                 </CardSubtitle>
 
             </CardHeader>

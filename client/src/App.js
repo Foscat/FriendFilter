@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {  BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
+import { Container, Button } from "reactstrap";
 import Home from "./components/pages/Home";
-import WorkBench from './components/pages/WorkBench';
+// import WorkBench from './components/pages/WorkBench';
+import Forum from "./components/pages/Forum";
 import NoMatch from './components/pages/NoMatch';
 import NavBar from "./components/parts/NavBar";
 import API from './utils/API';
@@ -97,8 +99,13 @@ class App extends Component {
         this.setState({ user: "", loggedIn: false });
     };
 
+    isLoggedIn = () =>{
+        return this.state.loggedIn;
+    }
+
     render() {
         let home;
+        let forum;
         if(!this.state.loggedIn){
             home =  <Home 
                     authenticate={this.authenticate}
@@ -107,9 +114,15 @@ class App extends Component {
                     signOut={this.signOutUser}
                     autoLogIn={this.setAutoLogin}
                 />
+            forum= <Container className="mx-auto text-center pt-4">
+                        <h3>You must be signed in to view this feature</h3>
+                        <a href="/"><Button color="info">Back To Home</Button></a>
+                    </Container>
+            
         }
         else {
             home = <UserHome user={this.state.user} signOut={this.signOutUser} authenticate={this.authenticate} />
+            forum= <Forum user={this.state.user} signOut={this.signOutUser} authenticate={this.authenticate} />
         }
         return (
             <div>
@@ -131,6 +144,7 @@ class App extends Component {
                             } />
                             {/* Workbench is for writing new code to keep new parts isolated for easier developing */}
                             {/* <Route exact path="/workbench" component={WorkBench} /> */}
+                            <Route exact path="/forum" render={() => forum } />
                             {/* If no url routes match show error page */}
                             <Route component={NoMatch} />
                         </Switch>

@@ -36,9 +36,9 @@ class NavBar extends Component  {
                             <li className="nav-item">
                                 <NavLink style={styles.link} href="/survey">Survey</NavLink>
                             </li>
-                            {/* <li className="nav-item">
-                                <NavLink style={styles.link} href="/workbench">Workbench</NavLink>
-                            </li> */}
+                            <li className="nav-item">
+                                <NavLink style={styles.link} href="/forum">Forum</NavLink>
+                            </li>
                         </ul>
                     </div>
                 </nav>

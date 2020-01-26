@@ -36,5 +36,57 @@ export default {
   // Find matches for user
   findMatches: function(personalityType){
     return axios.post("/api/users/matches", personalityType);
-  }
+  },
+  // Find all boardposts a user has made
+  findUserBoardPosts: function(userId){
+    console.log("Find boardposts by user id", userId);
+    return axios.get("/api/boardPosts/user/"+userId)
+  },
+  // Find all comments posted by a user
+  findUserComments: function(userId){
+    console.log("Find comments by user id", userId);
+    return axios.get("/api/postComments/user/"+userId)
+  },
+    ///// Board Post CRUD \\\\\
+    
+  // Add a Board Post
+  addBoardPost: function(boardPostData) {
+    console.log("Add BoardPost data: ", boardPostData);
+    return axios.post("/api/boardPosts", boardPostData);
+  },
+  // Gets all Board Posts
+  getBoardPosts: function() {
+    return axios.get("/api/boardPosts");
+  },
+  // Update info on Board Post
+  updateBoardPost: function(id, updateData) {
+    console.log("Update Board Post id and data: ", id, updateData);
+    return axios.put("/api/boardPosts/" + id, updateData)
+  },
+  // Delete a Board Post
+  deleteBoardPost: function(id) {
+    console.log("Delete Board Post with id: ", id);
+    return axios.delete("/api/boardPosts/" + id);
+  },
+  // Add a comment to a post
+  addComment: function(postCommentData) {
+    console.log("Add post comment data: ", postCommentData);
+    return axios.post("/api/postComments", postCommentData);
+  },
+  // Gets all comments on a post
+  getComments: function(bpId) {
+    console.log("get comments", bpId);
+    // Needs to have a boardPost Id it is ties to
+    return axios.get("/api/postComments/" + bpId);
+  },
+  // Update info on comment
+  updateComment: function(id, updateData) {
+    console.log("Update comment with id and data: ", id, updateData);
+    return axios.put("/api/postComments/" + id, updateData)
+  },
+  // Delete a comment
+  deleteComment: function(id) {
+    console.log("Delete comment with id: ", id);
+    return axios.delete("/api/postComments/" + id);
+  },
 }

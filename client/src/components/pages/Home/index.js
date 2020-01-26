@@ -225,9 +225,9 @@ class Home extends Component{
         );
         // Update state to show model
         this.setState({
-        title: "Sign into your account",
-        text: text,
-        show: true
+            title: "Sign into your account",
+            text: text,
+            show: true
         })
     }
 
