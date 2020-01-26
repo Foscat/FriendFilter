@@ -13,13 +13,6 @@ const EditCom = (props) => {
                 >
 
                 <FormGroup>
-                    <Label for="editCommentPostAuthor">Comment author</Label>
-                    <Input type="text" name="editCommentPostAuthor" onChange={props.handleInputChange}
-                    id="editCommentPostAuthor" defaultValue={props.boardPostComment.commentAuthor} placeholder="Author"/>
-                </FormGroup>
-
-
-                <FormGroup>
                     <Label for="editCommentPostBody">Comment body</Label>
                     <Input type="textarea" name="editCommentPostBody" onChange={props.handleInputChange}
                     id="editCommentPostBody" defaultValue={props.boardPostComment.commentBody} placeholder="Body "/>

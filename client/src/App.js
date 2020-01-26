@@ -114,10 +114,9 @@ class App extends Component {
                     signOut={this.signOutUser}
                     autoLogIn={this.setAutoLogin}
                 />
-            forum= <Container className="mx-auto text-center">
+            forum= <Container className="mx-auto text-center pt-4">
                         <h3>You must be signed in to view this feature</h3>
-                        <Button color="info">Sign In</Button>
-                        <Button color="success">Sign Up</Button>
+                        <a href="/"><Button color="info">Back To Home</Button></a>
                     </Container>
             
         }

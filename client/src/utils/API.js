@@ -37,7 +37,16 @@ export default {
   findMatches: function(personalityType){
     return axios.post("/api/users/matches", personalityType);
   },
-
+  // Find all boardposts a user has made
+  findUserBoardPosts: function(userId){
+    console.log("Find boardposts by user id", userId);
+    return axios.get("/api/boardPosts/user/"+userId)
+  },
+  // Find all comments posted by a user
+  findUserComments: function(userId){
+    console.log("Find comments by user id", userId);
+    return axios.get("/api/postComments/user/"+userId)
+  },
     ///// Board Post CRUD \\\\\
     
   // Add a Board Post

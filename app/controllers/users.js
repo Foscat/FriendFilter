@@ -99,7 +99,6 @@ module.exports = {
           if(score > 60) req.body.personalityType = "Stik inda mudd"
         }
       }
-
       
       // req.body[updatedAt] = req.body[updatedAt] = moment().format("dddd, MMMM Do YYYY, h:mm:ss a") || moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
       console.log("Find one user and update request.", req.params.id, req.body);

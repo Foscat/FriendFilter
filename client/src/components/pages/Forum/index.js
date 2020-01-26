@@ -27,21 +27,17 @@ class Forum extends Component {
             commentPool: [],
 
             // Add post state
-            addPostAuthor: "",
             addPostTitle: "",
             addPostBody: "",
 
             // Update post state
-            editPostAuthor: "",
             editPostTitle: "",
             editPostBody: "",
 
             // Comment on post state
-            commentPostAuthor: "",
             commentPostBody: "",
-
+            
             // Update comment on post
-            editCommentPostAuthor: "",
             editCommentPostBody: "",
 
             // Model attrs
@@ -130,13 +126,11 @@ class Forum extends Component {
     // Sweet alert model that contains form for commenting on a post 
     commentModal = boardPostComment => {
         let text = (
-            <div>
                 <BpCom_Form 
                     handleInputChange={this.handleInputChange}
                     handleCommentFormSubmit={this.handleCommentFormSubmit}
                     boardPostComment={boardPostComment}
                 />
-            </div>
         )
         // Update state to show model
         this.setState({
@@ -172,13 +166,14 @@ class Forum extends Component {
     handleCommentFormSubmit = (id) => {
         // **Un-comment out to test values**
         console.log("Id arg check: ",  id)
-        console.log("Comment author: ", this.state.commentPostAuthor);
+        console.log("Comment author: ", this.state.user.username);
         console.log("Comment body: ", this.state.commentPostBody);
 
         // Send field info to
         API.addComment({
             _boardPostId: id,
-            commentAuthor: this.state.commentPostAuthor,
+            _comAuthorId: this.state.user._id,
+            commentAuthor: this.state.user.username,
             commentBody: this.state.commentPostBody
         })
         .then(() => {
@@ -209,7 +204,6 @@ class Forum extends Component {
     editComModel = boardPostComment => {
         // Set state to match so that unchanged values are not erased
         this.setState({ 
-            editCommentPostAuthor : boardPostComment.commentAuthor,
             editCommentPostBody : boardPostComment.commentTitle,
         });
         let text = (
@@ -291,8 +285,42 @@ class Forum extends Component {
                             >
                                 <p> {bp.postBody} </p>
 
-                                <Button color="danger" onClick={()=> this.deleteBoardPost(bp._id)}>X</Button>
-                                <Button color="warning" onClick={() => this.editBP_Modal(bp)}>Edit</Button>
+                                {this.state.user._id === bp._postAuthorId ? (
+                                    <div>
+                                        <Button color="danger" onClick={()=> this.deleteBoardPost(bp._id)}>X</Button>
+                                        <Button color="warning" onClick={() => this.editBP_Modal(bp)}>Edit</Button>
+                                    </div>
+                                ): null}
+                                <Button color="primary" onClick={() => this.commentModal(bp)}>Comment</Button>
+                                <Button color="success" onClick={() => this.getThisPostComments(bp._id)}>Get comments</Button>
+
+                                <div>
+                                    {this.state.whichPost === bp._id && this.state.commentPool.length ? (
+                                        <div>
+                                            <Button onClick={()=> this.closeComments()}>
+                                                Close
+                                            </Button>
+
+                                            {this.state.commentPool.map(comment => {
+                                                return (
+                                                    <TextCard
+                                                        key={comment._id}
+                                                        title={`Posted by ${comment.commentAuthor}`}
+                                                    >
+                                                        <p> {comment.commentBody} </p>
+
+                                                        {comment._comAuthorId === this.state.user._id ? (
+                                                            <div>
+                                                                <Button color="warning" onClick={()=> this.editComModel(comment)}>Edit</Button>
+                                                                <Button color="danger" onClick={()=>this.deleteComment(comment._id, bp._id)}>X</Button>
+                                                            </div>
+                                                        ) : null}
+                                                    </TextCard>
+                                                )
+                                            })}
+                                        </div>
+                                    ) : null }
+                                </div>
                             </TextCard>
                         )
                     })) : null}

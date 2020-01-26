@@ -12,8 +12,9 @@ const postCommentsController = require("../../controllers/postComments");
     .get(postCommentsController.findByBoardPostId)
     .put(postCommentsController.update)
     .delete(postCommentsController.remove);
-
-
   
+  router
+    .route("/user/:authorId")
+    .get(postCommentsController.findByComAuthId)
 
 module.exports = router;

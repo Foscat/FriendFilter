@@ -16,6 +16,12 @@ module.exports = {
       .then(dbBoardPost => res.json(dbBoardPost))
       .catch(err => res.status(422).json(err));
   },
+  findByAuthorId: function(req,res){
+    console.log("Find boardposts by author id", req.params.authorId);
+    db.BoardPost.find({_postAuthorId:req.params.authorId})
+      .then(dbBoardPost => res.json(dbBoardPost))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     req.body.createdAt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
     console.log("Create board post request",req.body);
@@ -24,7 +30,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log("Update board post request:", req.params.id, req.body)
+    console.log("Update board post request:", req.params.id, req.body);
+    req.body.updatedAt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
     db.BoardPost.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbBoardPost => (res.json(dbBoardPost)))
       .catch(err => res.status(422).json(err));

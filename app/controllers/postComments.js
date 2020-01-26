@@ -9,16 +9,22 @@ module.exports = {
   // Since comments have a relation with borad posts we need a specal call to get all
   // comments related to the board post
   findByBoardPostId: function(req, res){
-    console.log("Find comment by board bpost id request", req.params.id);
+    console.log("Find comment by board boardpost id request", req.params.id);
     db.PostComment.find({_boardPostId : req.params.id})
       .then(dbPostComment => res.json(dbPostComment))
       .catch(err => res.status(422).json(err));
+  },
+  // And to get all comments on board posts made by a user
+  findByComAuthId: function(req,res){
+    console.log("Find comments by author id request", req.params.authorId)
+    db.PostComment.find({_comAuthorId:req.params.authorId})
+      .then(dbPostComment => res.json(dbPostComment))
+      .catch(err => res.status(422).json(err))
   },
   findAll: function(req, res) {
     console.log("Find all comments request");
     db.PostComment.find(req.query)
       .then(dbPostComment => res.json(dbPostComment))
-      .then(console.log(dbPostComment))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
@@ -35,11 +41,11 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log("Update comment on board post request", req.params.id, req.body)
+    console.log("Update comment on board post request", req.params.id, req.body);
+    req.body.updatedAt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
     db.PostComment.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbPostComment => (res.json(dbPostComment)))
       .catch(err => res.status(422).json(err));
-      
   },
   remove: function(req, res) {
     console.log("Delete comment by id request", req.params.id);
