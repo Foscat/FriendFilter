@@ -125,7 +125,7 @@ class App extends Component {
             forum= <Forum user={this.state.user} signOut={this.signOutUser} authenticate={this.authenticate} />
         }
         return (
-            <div>
+            <div style={{backgroundColor: "#b0cdde"}}>
                 {/* Allows navbar to stay on all pages */}
                 <NavBar />
                 <Router>

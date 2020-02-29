@@ -254,9 +254,10 @@ class Home extends Component{
                     <Col lg="6" className="mx-auto">
                         <TextCard 
                             title="Sign up to find friends"
-                            subtitle="5 internet friends == 1 real life friend">
+                            subtitle="5 internet friends == 1 real life friend"
+                            >
 
-                                <img className="card-img" src="./images/tryToday.png" alt="try today" />
+                                <img className="card-img" style={styles.img} src="./images/tryToday.png" alt="try today" />
 
                                 <Button className="m-1" color="info" onClick={() => this.getUsers()}>
                                     See all users
@@ -315,6 +316,11 @@ const styles = {
     container: {
         padding: "20px",
         backgroundColor: "rgb(122, 111, 148, 50%)"
+    },
+    img:{
+        maxHeight: "500px",
+        maxWidth: "300px",
+        margin: "0 auto"
     }
 }
 

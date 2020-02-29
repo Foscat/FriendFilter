@@ -135,10 +135,10 @@ class Survey extends Component  {
                     return (
                         <Container style={styles.container}>
                             
-                            <Row>
+                            <Row className="mb-3">
                                 <Col>
                                     <div className="card">
-                                        <img className="card-img" src="./images/opinions.png" alt="'opinions'" />
+                                        <img className="card-img" style={styles.img} src="./images/opinions.png" alt="'opinions'" />
                                     </div>
                                 </Col>
                                 <Col>
@@ -188,7 +188,7 @@ class Survey extends Component  {
                 }
             }else{
                 return(
-                    <div>
+                    <div style={{backgroundColor: "rgb(122, 111, 148, 50%)"}}>
 
                         <SweetAlert
                             show={this.state.show}
@@ -233,8 +233,12 @@ const styles = {
     formRow: {
         backgroundColor: "rgb(83, 81, 86, 80%)",
         color: "white"
+    },
+    img:{
+        maxHeight:"500px",
+        maxWidth: "400px",
+        margin:"0 auto"
     }
-
 };
 
 export default Survey;
